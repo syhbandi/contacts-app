@@ -3,15 +3,16 @@ import { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import { Menu as MenuIcon } from "@mui/icons-material";
-import MenuUser from "../components/MenuUser";
 import Drawer from "../components/Drawer";
 import ListContacts from "../components/ListContacts";
 import PersonAdd from "@mui/icons-material/PersonAddAlt1";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Home = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const { user } = useSelector((state) => state.auth);
   return (
     <>
       <AppBar position="static" className="bg-blue-600">
@@ -24,7 +25,7 @@ const Home = () => {
           >
             <MenuIcon />
           </IconButton>
-          <h4>APP kontak</h4>
+          <div className="text-lg font-medium ml-auto">{user && user.nama}</div>
         </Toolbar>
       </AppBar>
       <Drawer open={open} setOpen={setOpen} />
